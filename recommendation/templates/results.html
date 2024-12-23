@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Selection</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Basic styling for body */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Styling for the heading */
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Input search box styling */
+        #career-search {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Container for career options */
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Styling for each career option */
+        .career-option {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        /* Checkbox styling */
+        input[type="checkbox"] {
+            margin-right: 10px;
+            accent-color: #007BFF; /* Change checkbox color */
+        }
+
+        /* Button styling */
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+
+        /* Button hover effect */
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script>
+        function filterCareers() {
+            const input = document.getElementById('career-search').value.toLowerCase();
+            const options = document.getElementsByClassName('career-option');
+
+            for (let i = 0; i < options.length; i++) {
+                const label = options[i].querySelector('label').innerText.toLowerCase();
+                options[i].style.display = label.includes(input) ? '' : 'none';
+            }
+        }
+    </script>
+    
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Top Recommended Studies with Probabilities</h1>
+        <ul class="list-group mt-3">
+            {% for recommendation in recommendations %}
+                <li class="list-group-item">{{ recommendation.0 }} with probability {{ recommendation.1 }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+<h2>Select Your Career Option</h2>
+<input type="text" id="career-search" onkeyup="filterCareers()" placeholder="Search for careers..">
+
+<form action="/submit_career_selection/" method="post">
+    {% csrf_token %}
+    <div class="career-option">
+        <input type="checkbox" id="accountant" name="career_options" value="Accountant">
+        <label for="accountant">Accountant</label>
+    </div>
+    <div class="career-option">
+        <input type="checkbox" id="artist" name="career_options" value="Artist">
+        <label for="artist">Artist</label>
+    </div>
+    <div class="career-option">
+        <input type="checkbox" id="banker" name="career_options" value="Banker">
+        <label for="banker">Banker</label>
+    </div>
+    <div class="career-option">
+        <input type="checkbox" id="business_owner" name="career_options" value="Business Owner">
+        <label for="business_owner">Business Owner</label>
+    </div>
+    <div class="career-option">
+        <input type="checkbox" id="construction_engineer" name="career_options" value="Construction Engineer">
+        <label for="construction_engineer">Construction Engineer</label>
+    </div>
+    <div class="career-option">
+        <input type="checkbox" id="designer" name="career_options" value="Designer">
+        <label for="designer">Designer</label>
+    </div>
+    <div class="career-option">
+        <input type="checkbox" id="doctor" name="career_options" value="Doctor">
+        <label for="doctor">Doctor</label>
+    </div>
+    <div class="career-option">
+        <input type="checkbox" id="game_developer" name="career_options" value="Game Developer">
+        <label for="game_developer">Game Developer</label>
+    </div>
+    <div class="career-option">
+        <input type="checkbox" id="government_officer" name="career_options" value="Government Officer">
+        <label for="government_officer">Government Officer</label>
+    </div>
+    <div class="career-option">
+        <input type="checkbox" id="lawyer" name="career_options" value="Lawyer">
+        <label for="lawyer">Lawyer</label>
+    </div>
+    <div class="career-option">
+        <input type="checkbox" id="real_estate_developer" name="career_options" value="Real Estate Developer">
+        <label for="real_estate_developer">Real Estate Developer</label>
+    </div>
+    <div class="career-option">
+        <input type="checkbox" id="scientist" name="career_options" value="Scientist">
+        <label for="scientist">Scientist</label>
+    </div>
+    <div class="career-option">
+        <input type="checkbox" id="software_engineer" name="career_options" value="Software Engineer">
+        <label for="software_engineer">Software Engineer</label>
+    </div>
+    <div class="career-option">
+        <input type="checkbox" id="stock_investor" name="career_options" value="Stock Investor">
+        <label for="stock_investor">Stock Investor</label>
+    </div>
+    <div class="career-option">
+        <input type="checkbox" id="teacher" name="career_options" value="Teacher">
+        <label for="teacher">Teacher</label>
+    </div>
+    <div class="career-option">
+        <input type="checkbox" id="writer" name="career_options" value="Writer">
+        <label for="writer">Writer</label>
+    </div>
+    <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>
